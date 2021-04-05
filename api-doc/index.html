@@ -1,0 +1,3873 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/favicon.svg" sizes="32x32">
+    <title>Kubevisor Operator GraphQL API</title>
+    <link rel="stylesheet" href="stylesheets/spectaql.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="javascripts/spectaql.min.js"></script>
+  </head>
+  <body id="spectacle">
+    <div id="page" class="drawer-layout drawer-slide-right-large">
+      <div id="sidebar">
+        <button id="close-button" class="close-button" aria-label="Close menu" type="button" data-drawer-close>
+          <span aria-hidden="true">×</span>
+        </button>
+        <div id="logo">
+          <img src="images/logo.png" title="Kubevisor Operator GraphQL API" /> </div>
+        <nav id="nav" role="navigation">
+          <h5>Introduction</h5>
+          <a href="#introduction">Welcome</a>
+          <h5>Operations</h5>
+          <section>
+            <a href="#tag-Queries">Queries</a>
+            <ul>
+              <li>
+                <a href="#operation-inhibitors-post"> inhibitors </a>
+              </li>
+              <li>
+                <a href="#operation-namespaces-post"> namespaces </a>
+              </li>
+              <li>
+                <a href="#operation-reactors-post"> reactors </a>
+              </li>
+              <li>
+                <a href="#operation-schemas-post"> schemas </a>
+              </li>
+              <li>
+                <a href="#operation-units-post"> units </a>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <a href="#tag-Mutations">Mutations</a>
+            <ul>
+              <li>
+                <a href="#operation-createinhibitor-post"> createInhibitor </a>
+              </li>
+              <li>
+                <a href="#operation-createreactor-post"> createReactor </a>
+              </li>
+              <li>
+                <a href="#operation-createunit-post"> createUnit </a>
+              </li>
+              <li>
+                <a href="#operation-deleteinhibitor-post"> deleteInhibitor </a>
+              </li>
+              <li>
+                <a href="#operation-deletereactor-post"> deleteReactor </a>
+              </li>
+              <li>
+                <a href="#operation-deleteunit-post"> deleteUnit </a>
+              </li>
+              <li>
+                <a href="#operation-patchinhibitor-post"> patchInhibitor </a>
+              </li>
+              <li>
+                <a href="#operation-patchreactor-post"> patchReactor </a>
+              </li>
+              <li>
+                <a href="#operation-patchunit-post"> patchUnit </a>
+              </li>
+            </ul>
+          </section>
+          <h5>Types</h5>
+          <a href="#definition-Annotation"> Annotation </a>
+          <a href="#definition-AnnotationField"> AnnotationField </a>
+          <a href="#definition-Boolean"> Boolean </a>
+          <a href="#definition-Env"> Env </a>
+          <a href="#definition-EnvField"> EnvField </a>
+          <a href="#definition-EnvFrom"> EnvFrom </a>
+          <a href="#definition-EnvFromField"> EnvFromField </a>
+          <a href="#definition-EnvValueFrom"> EnvValueFrom </a>
+          <a href="#definition-EnvValueFromField"> EnvValueFromField </a>
+          <a href="#definition-Event"> Event </a>
+          <a href="#definition-EventField"> EventField </a>
+          <a href="#definition-EventHistory"> EventHistory </a>
+          <a href="#definition-Image"> Image </a>
+          <a href="#definition-ImageCreateField"> ImageCreateField </a>
+          <a href="#definition-ImagePullPolicy"> ImagePullPolicy </a>
+          <a href="#definition-ImageUpdateField"> ImageUpdateField </a>
+          <a href="#definition-Inhibitor"> Inhibitor </a>
+          <a href="#definition-InhibitorCreateField"> InhibitorCreateField </a>
+          <a href="#definition-InhibitorPatchField"> InhibitorPatchField </a>
+          <a href="#definition-Inhibitors"> Inhibitors </a>
+          <a href="#definition-Int"> Int </a>
+          <a href="#definition-JSON"> JSON </a>
+          <a href="#definition-KeyRef"> KeyRef </a>
+          <a href="#definition-KeyRefField"> KeyRefField </a>
+          <a href="#definition-Label"> Label </a>
+          <a href="#definition-LabelField"> LabelField </a>
+          <a href="#definition-Namespace"> Namespace </a>
+          <a href="#definition-Namespaces"> Namespaces </a>
+          <a href="#definition-Pagination"> Pagination </a>
+          <a href="#definition-Reactor"> Reactor </a>
+          <a href="#definition-ReactorCreateField"> ReactorCreateField </a>
+          <a href="#definition-ReactorPatchField"> ReactorPatchField </a>
+          <a href="#definition-ReactorTriggers"> ReactorTriggers </a>
+          <a href="#definition-ReactorTriggersCreateField"> ReactorTriggersCreateField </a>
+          <a href="#definition-ReactorTriggersUpdateField"> ReactorTriggersUpdateField </a>
+          <a href="#definition-Reactors"> Reactors </a>
+          <a href="#definition-Ref"> Ref </a>
+          <a href="#definition-RefField"> RefField </a>
+          <a href="#definition-ResourceField"> ResourceField </a>
+          <a href="#definition-ResourceFilter"> ResourceFilter </a>
+          <a href="#definition-Schemas"> Schemas </a>
+          <a href="#definition-Sorting"> Sorting </a>
+          <a href="#definition-String"> String </a>
+          <a href="#definition-Unit"> Unit </a>
+          <a href="#definition-UnitCreateField"> UnitCreateField </a>
+          <a href="#definition-UnitPatchField"> UnitPatchField </a>
+          <a href="#definition-UnitStatus"> UnitStatus </a>
+          <a href="#definition-Units"> Units </a>
+          <a href="#definition-Volume"> Volume </a>
+          <a href="#definition-VolumeField"> VolumeField </a>
+        </nav>
+      </div>
+      <div id="docs" class="row collapse expanded drawer" data-drawer>
+        <button class="floating-menu-icon" type="button" data-drawer-slide="right">
+          <span class="hamburger"></span>
+        </button>
+        <div class="example-box doc-content"></div>
+        <article id="content">
+          <h1 class="doc-title">Kubevisor Operator GraphQL API</h1>
+          <div id="introduction" data-traverse-target="introduction">
+            <div class="doc-row">
+              <div class="doc-copy">
+                <p>API documentation and tutorials</p>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>API Endpoints</h5> <pre><code>Kubevisor Operator Graphql API:
+http://kubevisor-operator.default.svc.cluster.local/graphql
+</code></pre>
+                  <p>Terms of Service:
+                    <a href="/legals">/legals</a>
+                  </p>
+                  <p>Contact:
+                    <a href="mailto:support@link-society.com">support@link-society.com</a>
+                  </p>
+                  <h5>Version:
+                    <span>1.0.0-rc2</span>
+                  </h5>
+                </section>
+              </div>
+            </div>
+          </div>
+          <h1 id="tag-Queries" class="swagger-summary-tag tag-name" data-traverse-target="tag-Queries">Queries</h1>
+          <div id="operation-inhibitors-post" class="operation panel" data-traverse-target="operation-inhibitors-post">
+            <h2 class="operation-name"> <code>inhibitors</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns an
+                  <a href="#definition-Inhibitors"><code>Inhibitors!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>filter</code> -
+                        <a href="#definition-ResourceFilter"><code>ResourceFilter</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> inhibitors<span class="hljs-tag">(<span class="hljs-code">$filter</span>:<span class="hljs-type"> ResourceFilter)</span> {
+  inhibitors(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">total</span>
+    <span class="hljs-symbol">items<span class="hljs-tag">(paging: <span class="hljs-code">$paging</span>, sorting: <span class="hljs-code">$sorting</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...InhibitorFragment</span>
+    }</span></span>
+  }</span></span>
+}
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"filter"</span>: ResourceFilter}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"inhibitors"</span>: {<span class="hljs-attr">"total"</span>: <span class="hljs-number">987</span>, <span class="hljs-attr">"items"</span>: [Inhibitor]}
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-namespaces-post" class="operation panel" data-traverse-target="operation-namespaces-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Queries">Queries</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>namespaces</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Namespaces"><code>Namespaces!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>filter</code> -
+                        <a href="#definition-ResourceFilter"><code>ResourceFilter</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> namespaces<span class="hljs-tag">(<span class="hljs-code">$filter</span>:<span class="hljs-type"> ResourceFilter)</span> {
+  namespaces(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">total</span>
+    <span class="hljs-symbol">items<span class="hljs-tag">(paging: <span class="hljs-code">$paging</span>, sorting: <span class="hljs-code">$sorting</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...NamespaceFragment</span>
+    }</span></span>
+  }</span></span>
+}
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"filter"</span>: ResourceFilter}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"namespaces"</span>: {<span class="hljs-attr">"total"</span>: <span class="hljs-number">987</span>, <span class="hljs-attr">"items"</span>: [Namespace]}
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-reactors-post" class="operation panel" data-traverse-target="operation-reactors-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Queries">Queries</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>reactors</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Reactors"><code>Reactors!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>filter</code> -
+                        <a href="#definition-ResourceFilter"><code>ResourceFilter</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> reactors<span class="hljs-tag">(<span class="hljs-code">$filter</span>:<span class="hljs-type"> ResourceFilter)</span> {
+  reactors(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">total</span>
+    <span class="hljs-symbol">items<span class="hljs-tag">(paging: <span class="hljs-code">$paging</span>, sorting: <span class="hljs-code">$sorting</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorFragment</span>
+    }</span></span>
+  }</span></span>
+}
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"filter"</span>: ResourceFilter}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"data"</span>: {<span class="hljs-attr">"reactors"</span>: {<span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">"items"</span>: [Reactor]}}}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-schemas-post" class="operation panel" data-traverse-target="operation-schemas-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Queries">Queries</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>schemas</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Schemas"><code>Schemas!</code></a>
+                </section>
+                <br> </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> schemas <span class="hljs-tag">{
+  <span class="hljs-symbol">schemas <span class="hljs-tag">{
+    <span class="hljs-symbol">unit</span>
+    <span class="hljs-symbol">reactor</span>
+    <span class="hljs-symbol">inhibitor</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"schemas"</span>: {
+      <span class="hljs-attr">"unit"</span>: {},
+      <span class="hljs-attr">"reactor"</span>: {},
+      <span class="hljs-attr">"inhibitor"</span>: {}
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-units-post" class="operation panel" data-traverse-target="operation-units-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Queries">Queries</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>units</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Units"><code>Units!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>filter</code> -
+                        <a href="#definition-ResourceFilter"><code>ResourceFilter</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> units<span class="hljs-tag">(<span class="hljs-code">$filter</span>:<span class="hljs-type"> ResourceFilter)</span> {
+  units(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">total</span>
+    <span class="hljs-symbol">successful</span>
+    <span class="hljs-symbol">failed</span>
+    <span class="hljs-symbol">unknown</span>
+    <span class="hljs-symbol">items<span class="hljs-tag">(paging: <span class="hljs-code">$paging</span>, sorting: <span class="hljs-code">$sorting</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...UnitFragment</span>
+    }</span></span>
+  }</span></span>
+}
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"filter"</span>: ResourceFilter}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"units"</span>: {
+      <span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"successful"</span>: <span class="hljs-number">987</span>,
+      <span class="hljs-attr">"failed"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"unknown"</span>: <span class="hljs-number">987</span>,
+      <span class="hljs-attr">"items"</span>: [Unit]
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <h1 id="tag-Mutations" class="swagger-summary-tag tag-name" data-traverse-target="tag-Mutations">Mutations</h1>
+          <div id="operation-createinhibitor-post" class="operation panel" data-traverse-target="operation-createinhibitor-post">
+            <h2 class="operation-name"> <code>createInhibitor</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns an
+                  <a href="#definition-Inhibitor"><code>Inhibitor!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>inhibitor</code> -
+                        <a href="#definition-InhibitorCreateField"><code>InhibitorCreateField!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> createInhibitor<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$inhibitor</span>:<span class="hljs-type"> InhibitorCreateField!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">createInhibitor<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>, inhibitor: <span class="hljs-code">$inhibitor</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">unitSelector <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">schedule</span>
+    <span class="hljs-symbol">duration</span>
+    <span class="hljs-symbol">startDate</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"inhibitor"</span>: InhibitorCreateField
+}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"createInhibitor"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"unitSelector"</span>: [Label],
+      <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"startDate"</span>: <span class="hljs-string">"abc123"</span>
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-createreactor-post" class="operation panel" data-traverse-target="operation-createreactor-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>createReactor</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Reactor"><code>Reactor!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>reactor</code> -
+                        <a href="#definition-ReactorCreateField"><code>ReactorCreateField!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> createReactor<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$reactor</span>:<span class="hljs-type"> ReactorCreateField!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">createReactor<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>, reactor: <span class="hljs-code">$reactor</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">unitSelector <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">image <span class="hljs-tag">{
+      <span class="hljs-type">...ImageFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">volumes</span>
+    <span class="hljs-symbol">env <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">envFrom <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFromFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">triggers <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorTriggersFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"reactor"</span>: ReactorCreateField
+}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"createReactor"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"unitSelector"</span>: [Label],
+      <span class="hljs-attr">"image"</span>: Image,
+      <span class="hljs-attr">"volumes"</span>: [Volume],
+      <span class="hljs-attr">"env"</span>: [Env],
+      <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+      <span class="hljs-attr">"triggers"</span>: ReactorTriggers
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-createunit-post" class="operation panel" data-traverse-target="operation-createunit-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>createUnit</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Unit"><code>Unit!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>unit</code> -
+                        <a href="#definition-UnitCreateField"><code>UnitCreateField!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> createUnit<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$unit</span>:<span class="hljs-type"> UnitCreateField!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">createUnit<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>, unit: <span class="hljs-code">$unit</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">schedule</span>
+    <span class="hljs-symbol">image <span class="hljs-tag">{
+      <span class="hljs-type">...ImageFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">historySize</span>
+    <span class="hljs-symbol">volumes</span>
+    <span class="hljs-symbol">env <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">envFrom <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFromFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">status <span class="hljs-tag">{
+      <span class="hljs-type">...UnitStatusFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">history<span class="hljs-tag">(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...EventHistoryFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">reactors<span class="hljs-tag">(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorsFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"unit"</span>: UnitCreateField
+}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"createUnit"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">987</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"image"</span>: Image,
+      <span class="hljs-attr">"historySize"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"volumes"</span>: [Volume],
+      <span class="hljs-attr">"env"</span>: [Env],
+      <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+      <span class="hljs-attr">"status"</span>: UnitStatus,
+      <span class="hljs-attr">"history"</span>: EventHistory,
+      <span class="hljs-attr">"reactors"</span>: Reactors
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-deleteinhibitor-post" class="operation panel" data-traverse-target="operation-deleteinhibitor-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>deleteInhibitor</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns an
+                  <a href="#definition-Inhibitor"><code>Inhibitor!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> deleteInhibitor<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">deleteInhibitor<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">unitSelector <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">schedule</span>
+    <span class="hljs-symbol">duration</span>
+    <span class="hljs-symbol">startDate</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>, <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"deleteInhibitor"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">987</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"unitSelector"</span>: [Label],
+      <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"startDate"</span>: <span class="hljs-string">"abc123"</span>
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-deletereactor-post" class="operation panel" data-traverse-target="operation-deletereactor-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>deleteReactor</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Reactor"><code>Reactor!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> deleteReactor<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">deleteReactor<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">unitSelector <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">image <span class="hljs-tag">{
+      <span class="hljs-type">...ImageFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">volumes</span>
+    <span class="hljs-symbol">env <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">envFrom <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFromFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">triggers <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorTriggersFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>, <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"deleteReactor"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"unitSelector"</span>: [Label],
+      <span class="hljs-attr">"image"</span>: Image,
+      <span class="hljs-attr">"volumes"</span>: [Volume],
+      <span class="hljs-attr">"env"</span>: [Env],
+      <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+      <span class="hljs-attr">"triggers"</span>: ReactorTriggers
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-deleteunit-post" class="operation panel" data-traverse-target="operation-deleteunit-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>deleteUnit</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Unit"><code>Unit!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> deleteUnit<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">deleteUnit<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">schedule</span>
+    <span class="hljs-symbol">image <span class="hljs-tag">{
+      <span class="hljs-type">...ImageFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">historySize</span>
+    <span class="hljs-symbol">volumes</span>
+    <span class="hljs-symbol">env <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">envFrom <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFromFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">status <span class="hljs-tag">{
+      <span class="hljs-type">...UnitStatusFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">history<span class="hljs-tag">(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...EventHistoryFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">reactors<span class="hljs-tag">(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorsFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{<span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>, <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"deleteUnit"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">987</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"image"</span>: Image,
+      <span class="hljs-attr">"historySize"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"volumes"</span>: [Volume],
+      <span class="hljs-attr">"env"</span>: [Env],
+      <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+      <span class="hljs-attr">"status"</span>: UnitStatus,
+      <span class="hljs-attr">"history"</span>: EventHistory,
+      <span class="hljs-attr">"reactors"</span>: Reactors
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-patchinhibitor-post" class="operation panel" data-traverse-target="operation-patchinhibitor-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>patchInhibitor</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns an
+                  <a href="#definition-Inhibitor"><code>Inhibitor!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>inhibitor</code> -
+                        <a href="#definition-InhibitorPatchField"><code>InhibitorPatchField!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> patchInhibitor<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$inhibitor</span>:<span class="hljs-type"> InhibitorPatchField!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">patchInhibitor<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>, inhibitor: <span class="hljs-code">$inhibitor</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">unitSelector <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">schedule</span>
+    <span class="hljs-symbol">duration</span>
+    <span class="hljs-symbol">startDate</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"inhibitor"</span>: InhibitorPatchField
+}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"patchInhibitor"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"unitSelector"</span>: [Label],
+      <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"startDate"</span>: <span class="hljs-string">"abc123"</span>
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-patchreactor-post" class="operation panel" data-traverse-target="operation-patchreactor-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>patchReactor</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Reactor"><code>Reactor!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>reactor</code> -
+                        <a href="#definition-ReactorPatchField"><code>ReactorPatchField!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> patchReactor<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$reactor</span>:<span class="hljs-type"> ReactorPatchField!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">patchReactor<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>, reactor: <span class="hljs-code">$reactor</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">unitSelector <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">image <span class="hljs-tag">{
+      <span class="hljs-type">...ImageFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">volumes</span>
+    <span class="hljs-symbol">env <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">envFrom <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFromFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">triggers <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorTriggersFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"reactor"</span>: ReactorPatchField
+}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"patchReactor"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"abc123"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"unitSelector"</span>: [Label],
+      <span class="hljs-attr">"image"</span>: Image,
+      <span class="hljs-attr">"volumes"</span>: [Volume],
+      <span class="hljs-attr">"env"</span>: [Env],
+      <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+      <span class="hljs-attr">"triggers"</span>: ReactorTriggers
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="operation-patchunit-post" class="operation panel" data-traverse-target="operation-patchunit-post">
+            <!-- <section class="operation-tags row"> -->
+            <!-- <div class="doc-copy"> -->
+            <div class="operation-tags">
+              <a class="label" href="#tag-Mutations">Mutations</a>
+              <!---->
+            </div>
+            <!-- </div> -->
+            <!-- </section> -->
+            <h2 class="operation-name"> <code>patchUnit</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="swagger-request-body"> </section>
+                <section class="swagger-responses"> Returns a
+                  <a href="#definition-Unit"><code>Unit!</code></a>
+                </section>
+                <br>
+                <section class="swagger-request-params">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td><code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td><code>unit</code> -
+                        <a href="#definition-UnitPatchField"><code>UnitPatchField!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h4>Example</h3>
+                    <h5>Query</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> patchUnit<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$namespace</span>:<span class="hljs-type"> String!</span>, <span class="hljs-code">$unit</span>:<span class="hljs-type"> UnitPatchField!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">patchUnit<span class="hljs-tag">(name: <span class="hljs-code">$name</span>, namespace: <span class="hljs-code">$namespace</span>, unit: <span class="hljs-code">$unit</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">index</span>
+    <span class="hljs-symbol">apiVersion</span>
+    <span class="hljs-symbol">kind</span>
+    <span class="hljs-symbol">name</span>
+    <span class="hljs-symbol">namespace</span>
+    <span class="hljs-symbol">labels <span class="hljs-tag">{
+      <span class="hljs-type">...LabelFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">annotations <span class="hljs-tag">{
+      <span class="hljs-type">...AnnotationFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">schedule</span>
+    <span class="hljs-symbol">image <span class="hljs-tag">{
+      <span class="hljs-type">...ImageFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">historySize</span>
+    <span class="hljs-symbol">volumes</span>
+    <span class="hljs-symbol">env <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">envFrom <span class="hljs-tag">{
+      <span class="hljs-type">...EnvFromFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">status <span class="hljs-tag">{
+      <span class="hljs-type">...UnitStatusFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">history<span class="hljs-tag">(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...EventHistoryFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">reactors<span class="hljs-tag">(filter: <span class="hljs-code">$filter</span>)</span> <span class="hljs-tag">{
+      <span class="hljs-type">...ReactorsFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                    </html>
+                    <h5>Variables</h5>
+                    <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"unit"</span>: UnitPatchField
+}
+</code></pre> </body>
+                    </html>
+                </section>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Response </h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"patchUnit"</span>: {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"labels"</span>: [Label],
+      <span class="hljs-attr">"annotations"</span>: [Annotation],
+      <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"xyz789"</span>,
+      <span class="hljs-attr">"image"</span>: Image,
+      <span class="hljs-attr">"historySize"</span>: <span class="hljs-number">123</span>,
+      <span class="hljs-attr">"volumes"</span>: [Volume],
+      <span class="hljs-attr">"env"</span>: [Env],
+      <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+      <span class="hljs-attr">"status"</span>: UnitStatus,
+      <span class="hljs-attr">"history"</span>: EventHistory,
+      <span class="hljs-attr">"reactors"</span>: Reactors
+    }
+  }
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <span id="tag-types"></span>
+          <h1>Types</h1>
+          <div id="definition-Annotation" class="definition panel" data-traverse-target="definition-Annotation">
+            <h2 class="panel-title">
+              <a name="/definitions/Annotation"></a>
+              <p><code>Annotation</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="value"> <code>value</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"abc123"</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-AnnotationField" class="definition panel" data-traverse-target="definition-AnnotationField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/AnnotationField"></a>
+              <p><code>AnnotationField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Boolean" class="definition panel" data-traverse-target="definition-Boolean">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Boolean"></a>
+              <p><code>Boolean</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-description">
+                  <p>The <code>Boolean</code> scalar type represents <code>true</code> or <code>false</code>.</p>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-literal">true</span></span>
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Env" class="definition panel" data-traverse-target="definition-Env">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Env"></a>
+              <p><code>Env</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="value"> <code>value</code> -
+                        <a href="#definition-String"><code>String</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="valueFrom"> <code>valueFrom</code> -
+                        <a href="#definition-EnvValueFrom"><code>EnvValueFrom</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"valueFrom"</span>: EnvValueFrom
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EnvField" class="definition panel" data-traverse-target="definition-EnvField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EnvField"></a>
+              <p><code>EnvField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EnvFrom" class="definition panel" data-traverse-target="definition-EnvFrom">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EnvFrom"></a>
+              <p><code>EnvFrom</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="prefix"> <code>prefix</code> -
+                        <a href="#definition-String"><code>String</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="configMapRef"> <code>configMapRef</code> -
+                        <a href="#definition-Ref"><code>Ref</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="secretRef"> <code>secretRef</code> -
+                        <a href="#definition-Ref"><code>Ref</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"prefix"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"configMapRef"</span>: Ref,
+  <span class="hljs-attr">"secretRef"</span>: Ref
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EnvFromField" class="definition panel" data-traverse-target="definition-EnvFromField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EnvFromField"></a>
+              <p><code>EnvFromField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EnvValueFrom" class="definition panel" data-traverse-target="definition-EnvValueFrom">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EnvValueFrom"></a>
+              <p><code>EnvValueFrom</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="configMapKeyRef"> <code>configMapKeyRef</code> -
+                        <a href="#definition-KeyRef"><code>KeyRef</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="secretKeyRef"> <code>secretKeyRef</code> -
+                        <a href="#definition-KeyRef"><code>KeyRef</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"configMapKeyRef"</span>: KeyRef,
+  <span class="hljs-attr">"secretKeyRef"</span>: KeyRef
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EnvValueFromField" class="definition panel" data-traverse-target="definition-EnvValueFromField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EnvValueFromField"></a>
+              <p><code>EnvValueFromField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Event" class="definition panel" data-traverse-target="definition-Event">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Event"></a>
+              <p><code>Event</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="index"> <code>index</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="output"> <code>output</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="state"> <code>state</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="stateSeen"> <code>stateSeen</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"index"</span>: <span class="hljs-number">987</span>, <span class="hljs-attr">"output"</span>: <span class="hljs-string">"abc123"</span>, <span class="hljs-attr">"state"</span>: <span class="hljs-string">"xyz789"</span>, <span class="hljs-attr">"stateSeen"</span>: <span class="hljs-string">"abc123"</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EventField" class="definition panel" data-traverse-target="definition-EventField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EventField"></a>
+              <p><code>EventField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-EventHistory" class="definition panel" data-traverse-target="definition-EventHistory">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/EventHistory"></a>
+              <p><code>EventHistory</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="total"> <code>total</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="items"> <code>items</code> -
+                        <a href="#definition-Event"><code>[Event!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>paging</code> -
+                              <a href="#definition-Pagination"><code>Pagination</code></a>
+                            </p>
+                          </div>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>sorting</code> -
+                              <a href="#definition-Sorting"><code>Sorting</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">"items"</span>: [Event]}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Image" class="definition panel" data-traverse-target="definition-Image">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Image"></a>
+              <p><code>Image</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="pullPolicy"> <code>pullPolicy</code> -
+                        <a href="#definition-ImagePullPolicy"><code>ImagePullPolicy!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="command"> <code>command</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"pullPolicy"</span>: ImagePullPolicy,
+  <span class="hljs-attr">"command"</span>: <span class="hljs-string">"xyz789"</span>
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ImageCreateField" class="definition panel" data-traverse-target="definition-ImageCreateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ImageCreateField"></a>
+              <p><code>ImageCreateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ImagePullPolicy" class="definition panel" data-traverse-target="definition-ImagePullPolicy">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ImagePullPolicy"></a>
+              <p><code>ImagePullPolicy</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-anyOf">
+                  <dl>
+                    <dt>
+                      <div class="json-property-type">object</div>
+                      <span class="json-property-enum" title="Possible values">
+                        <span class="json-property-enum-item">IfNotPresent</span>
+                      </span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dd> </dd>
+                    <dt>
+                      <div class="json-property-type">object</div>
+                      <span class="json-property-enum" title="Possible values">
+                        <span class="json-property-enum-item">Always</span>
+                      </span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dd> </dd>
+                    <dt>
+                      <div class="json-property-type">object</div>
+                      <span class="json-property-enum" title="Possible values">
+                        <span class="json-property-enum-item">Never</span>
+                      </span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dd> </dd>
+                  </dl>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ImageUpdateField" class="definition panel" data-traverse-target="definition-ImageUpdateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ImageUpdateField"></a>
+              <p><code>ImageUpdateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Inhibitor" class="definition panel" data-traverse-target="definition-Inhibitor">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Inhibitor"></a>
+              <p><code>Inhibitor</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="index"> <code>index</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="apiVersion"> <code>apiVersion</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="kind"> <code>kind</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="namespace"> <code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="labels"> <code>labels</code> -
+                        <a href="#definition-Label"><code>[Label!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="annotations"> <code>annotations</code> -
+                        <a href="#definition-Annotation"><code>[Annotation!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="unitSelector"> <code>unitSelector</code> -
+                        <a href="#definition-Label"><code>[Label!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="schedule"> <code>schedule</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="duration"> <code>duration</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="startDate"> <code>startDate</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"labels"</span>: [Label],
+  <span class="hljs-attr">"annotations"</span>: [Annotation],
+  <span class="hljs-attr">"unitSelector"</span>: [Label],
+  <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"duration"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"startDate"</span>: <span class="hljs-string">"abc123"</span>
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-InhibitorCreateField" class="definition panel" data-traverse-target="definition-InhibitorCreateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/InhibitorCreateField"></a>
+              <p><code>InhibitorCreateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-InhibitorPatchField" class="definition panel" data-traverse-target="definition-InhibitorPatchField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/InhibitorPatchField"></a>
+              <p><code>InhibitorPatchField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Inhibitors" class="definition panel" data-traverse-target="definition-Inhibitors">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Inhibitors"></a>
+              <p><code>Inhibitors</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="total"> <code>total</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="items"> <code>items</code> -
+                        <a href="#definition-Inhibitor"><code>[Inhibitor!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>paging</code> -
+                              <a href="#definition-Pagination"><code>Pagination</code></a>
+                            </p>
+                          </div>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>sorting</code> -
+                              <a href="#definition-Sorting"><code>Sorting</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">"items"</span>: [Inhibitor]}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Int" class="definition panel" data-traverse-target="definition-Int">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Int"></a>
+              <p><code>Int</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-description">
+                  <p>The <code>Int</code> scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.</p>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">123</span>
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-JSON" class="definition panel" data-traverse-target="definition-JSON">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/JSON"></a>
+              <p><code>JSON</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-tag">{}</span>
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-KeyRef" class="definition panel" data-traverse-target="definition-KeyRef">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/KeyRef"></a>
+              <p><code>KeyRef</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="key"> <code>key</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="optional"> <code>optional</code> -
+                        <a href="#definition-Boolean"><code>Boolean</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"key"</span>: <span class="hljs-string">"xyz789"</span>, <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>, <span class="hljs-attr">"optional"</span>: <span class="hljs-literal">false</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-KeyRefField" class="definition panel" data-traverse-target="definition-KeyRefField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/KeyRefField"></a>
+              <p><code>KeyRefField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Label" class="definition panel" data-traverse-target="definition-Label">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Label"></a>
+              <p><code>Label</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="value"> <code>value</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>, <span class="hljs-attr">"value"</span>: <span class="hljs-string">"xyz789"</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-LabelField" class="definition panel" data-traverse-target="definition-LabelField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/LabelField"></a>
+              <p><code>LabelField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Namespace" class="definition panel" data-traverse-target="definition-Namespace">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Namespace"></a>
+              <p><code>Namespace</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="index"> <code>index</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="apiVersion"> <code>apiVersion</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="kind"> <code>kind</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="labels"> <code>labels</code> -
+                        <a href="#definition-Label"><code>[Label!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="annotations"> <code>annotations</code> -
+                        <a href="#definition-Annotation"><code>[Annotation!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"labels"</span>: [Label],
+  <span class="hljs-attr">"annotations"</span>: [Annotation]
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Namespaces" class="definition panel" data-traverse-target="definition-Namespaces">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Namespaces"></a>
+              <p><code>Namespaces</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="total"> <code>total</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="items"> <code>items</code> -
+                        <a href="#definition-Namespace"><code>[Namespace!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>paging</code> -
+                              <a href="#definition-Pagination"><code>Pagination</code></a>
+                            </p>
+                          </div>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>sorting</code> -
+                              <a href="#definition-Sorting"><code>Sorting</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">"items"</span>: [Namespace]}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Pagination" class="definition panel" data-traverse-target="definition-Pagination">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Pagination"></a>
+              <p><code>Pagination</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Reactor" class="definition panel" data-traverse-target="definition-Reactor">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Reactor"></a>
+              <p><code>Reactor</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="index"> <code>index</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="apiVersion"> <code>apiVersion</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="kind"> <code>kind</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="namespace"> <code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="labels"> <code>labels</code> -
+                        <a href="#definition-Label"><code>[Label!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="annotations"> <code>annotations</code> -
+                        <a href="#definition-Annotation"><code>[Annotation!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="unitSelector"> <code>unitSelector</code> -
+                        <a href="#definition-Label"><code>[Label!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="image"> <code>image</code> -
+                        <a href="#definition-Image"><code>Image!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="volumes"> <code>volumes</code> -
+                        <a href="#definition-Volume"><code>[Volume!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="env"> <code>env</code> -
+                        <a href="#definition-Env"><code>[Env!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="envFrom"> <code>envFrom</code> -
+                        <a href="#definition-EnvFrom"><code>[EnvFrom!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="triggers"> <code>triggers</code> -
+                        <a href="#definition-ReactorTriggers"><code>ReactorTriggers!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"index"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"labels"</span>: [Label],
+  <span class="hljs-attr">"annotations"</span>: [Annotation],
+  <span class="hljs-attr">"unitSelector"</span>: [Label],
+  <span class="hljs-attr">"image"</span>: Image,
+  <span class="hljs-attr">"volumes"</span>: [Volume],
+  <span class="hljs-attr">"env"</span>: [Env],
+  <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+  <span class="hljs-attr">"triggers"</span>: ReactorTriggers
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ReactorCreateField" class="definition panel" data-traverse-target="definition-ReactorCreateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ReactorCreateField"></a>
+              <p><code>ReactorCreateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ReactorPatchField" class="definition panel" data-traverse-target="definition-ReactorPatchField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ReactorPatchField"></a>
+              <p><code>ReactorPatchField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ReactorTriggers" class="definition panel" data-traverse-target="definition-ReactorTriggers">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ReactorTriggers"></a>
+              <p><code>ReactorTriggers</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="success"> <code>success</code> -
+                        <a href="#definition-Boolean"><code>Boolean!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="failure"> <code>failure</code> -
+                        <a href="#definition-Boolean"><code>Boolean!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="fixed"> <code>fixed</code> -
+                        <a href="#definition-Boolean"><code>Boolean!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="regression"> <code>regression</code> -
+                        <a href="#definition-Boolean"><code>Boolean!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">"failure"</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">"fixed"</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">"regression"</span>: <span class="hljs-literal">false</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ReactorTriggersCreateField" class="definition panel" data-traverse-target="definition-ReactorTriggersCreateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ReactorTriggersCreateField"></a>
+              <p><code>ReactorTriggersCreateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ReactorTriggersUpdateField" class="definition panel" data-traverse-target="definition-ReactorTriggersUpdateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ReactorTriggersUpdateField"></a>
+              <p><code>ReactorTriggersUpdateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Reactors" class="definition panel" data-traverse-target="definition-Reactors">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Reactors"></a>
+              <p><code>Reactors</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="total"> <code>total</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="items"> <code>items</code> -
+                        <a href="#definition-Reactor"><code>[Reactor!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>paging</code> -
+                              <a href="#definition-Pagination"><code>Pagination</code></a>
+                            </p>
+                          </div>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>sorting</code> -
+                              <a href="#definition-Sorting"><code>Sorting</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>, <span class="hljs-attr">"items"</span>: [Reactor]}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Ref" class="definition panel" data-traverse-target="definition-Ref">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Ref"></a>
+              <p><code>Ref</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="optional"> <code>optional</code> -
+                        <a href="#definition-Boolean"><code>Boolean</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>, <span class="hljs-attr">"optional"</span>: <span class="hljs-literal">true</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-RefField" class="definition panel" data-traverse-target="definition-RefField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/RefField"></a>
+              <p><code>RefField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ResourceField" class="definition panel" data-traverse-target="definition-ResourceField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ResourceField"></a>
+              <p><code>ResourceField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-ResourceFilter" class="definition panel" data-traverse-target="definition-ResourceFilter">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/ResourceFilter"></a>
+              <p><code>ResourceFilter</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Schemas" class="definition panel" data-traverse-target="definition-Schemas">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Schemas"></a>
+              <p><code>Schemas</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="unit"> <code>unit</code> -
+                        <a href="#definition-JSON"><code>JSON!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="reactor"> <code>reactor</code> -
+                        <a href="#definition-JSON"><code>JSON!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="inhibitor"> <code>inhibitor</code> -
+                        <a href="#definition-JSON"><code>JSON!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"unit"</span>: {},
+  <span class="hljs-attr">"reactor"</span>: {},
+  <span class="hljs-attr">"inhibitor"</span>: {}
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Sorting" class="definition panel" data-traverse-target="definition-Sorting">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Sorting"></a>
+              <p><code>Sorting</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-String" class="definition panel" data-traverse-target="definition-String">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/String"></a>
+              <p><code>String</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-description">
+                  <p>The <code>String</code> scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.</p>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Unit" class="definition panel" data-traverse-target="definition-Unit">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Unit"></a>
+              <p><code>Unit</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="index"> <code>index</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="apiVersion"> <code>apiVersion</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="kind"> <code>kind</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="name"> <code>name</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="namespace"> <code>namespace</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="labels"> <code>labels</code> -
+                        <a href="#definition-Label"><code>[Label!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="annotations"> <code>annotations</code> -
+                        <a href="#definition-Annotation"><code>[Annotation!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="schedule"> <code>schedule</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="image"> <code>image</code> -
+                        <a href="#definition-Image"><code>Image!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="historySize"> <code>historySize</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="volumes"> <code>volumes</code> -
+                        <a href="#definition-Volume"><code>[Volume!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="env"> <code>env</code> -
+                        <a href="#definition-Env"><code>[Env!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="envFrom"> <code>envFrom</code> -
+                        <a href="#definition-EnvFrom"><code>[EnvFrom!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="status"> <code>status</code> -
+                        <a href="#definition-UnitStatus"><code>UnitStatus</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="history"> <code>history</code> -
+                        <a href="#definition-EventHistory"><code>EventHistory!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>filter</code> -
+                              <a href="#definition-EventField"><code>EventField</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="reactors"> <code>reactors</code> -
+                        <a href="#definition-Reactors"><code>Reactors!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>filter</code> -
+                              <a href="#definition-ResourceField"><code>ResourceField</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"index"</span>: <span class="hljs-number">987</span>,
+  <span class="hljs-attr">"apiVersion"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"kind"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"namespace"</span>: <span class="hljs-string">"abc123"</span>,
+  <span class="hljs-attr">"labels"</span>: [Label],
+  <span class="hljs-attr">"annotations"</span>: [Annotation],
+  <span class="hljs-attr">"schedule"</span>: <span class="hljs-string">"xyz789"</span>,
+  <span class="hljs-attr">"image"</span>: Image,
+  <span class="hljs-attr">"historySize"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"volumes"</span>: [Volume],
+  <span class="hljs-attr">"env"</span>: [Env],
+  <span class="hljs-attr">"envFrom"</span>: [EnvFrom],
+  <span class="hljs-attr">"status"</span>: UnitStatus,
+  <span class="hljs-attr">"history"</span>: EventHistory,
+  <span class="hljs-attr">"reactors"</span>: Reactors
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-UnitCreateField" class="definition panel" data-traverse-target="definition-UnitCreateField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/UnitCreateField"></a>
+              <p><code>UnitCreateField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-UnitPatchField" class="definition panel" data-traverse-target="definition-UnitPatchField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/UnitPatchField"></a>
+              <p><code>UnitPatchField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-UnitStatus" class="definition panel" data-traverse-target="definition-UnitStatus">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/UnitStatus"></a>
+              <p><code>UnitStatus</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="lastState"> <code>lastState</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="lastStateSeen"> <code>lastStateSeen</code> -
+                        <a href="#definition-String"><code>String!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{<span class="hljs-attr">"lastState"</span>: <span class="hljs-string">"abc123"</span>, <span class="hljs-attr">"lastStateSeen"</span>: <span class="hljs-string">"abc123"</span>}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Units" class="definition panel" data-traverse-target="definition-Units">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Units"></a>
+              <p><code>Units</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <table>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                    <tr>
+                      <td data-property-name="total"> <code>total</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="successful"> <code>successful</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="failed"> <code>failed</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="unknown"> <code>unknown</code> -
+                        <a href="#definition-Int"><code>Int!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td data-property-name="items"> <code>items</code> -
+                        <a href="#definition-Unit"><code>[Unit!]!</code></a>
+                      </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="no-top-border">
+                        <div class="field-arguments">
+                          <p class="field-arguments-header"> Arguments </p>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>paging</code> -
+                              <a href="#definition-Pagination"><code>Pagination</code></a>
+                            </p>
+                          </div>
+                          <div class="field-argument">
+                            <p class="field-argument-name"><code>sorting</code> -
+                              <a href="#definition-Sorting"><code>Sorting</code></a>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"total"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"successful"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"failed"</span>: <span class="hljs-number">987</span>,
+  <span class="hljs-attr">"unknown"</span>: <span class="hljs-number">123</span>,
+  <span class="hljs-attr">"items"</span>: [Unit]
+}
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-Volume" class="definition panel" data-traverse-target="definition-Volume">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/Volume"></a>
+              <p><code>Volume</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">object</span>
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-VolumeField" class="definition panel" data-traverse-target="definition-VolumeField">
+            <div class="definition-tags">
+              <a class="label" href="#tag-types">Types</a>
+            </div>
+            <h2 class="panel-title">
+              <a name="/definitions/VolumeField"></a>
+              <p><code>VolumeField</code></p>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy"> </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">object</span>
+</code></pre> </body>
+                  </html>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="doc-row no-margin">
+            <div class="doc-copy doc-separator">
+              <a class="powered-by" href="https://github.com/anvilco/spectaql">Documentation by
+                <span>Anvil SpectaQL</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

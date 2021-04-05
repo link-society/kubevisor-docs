@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Kubevisor - Notify Slack</title><meta name=author content="Link-Society"><meta name=title content="Kubevisor"><meta name=description content="Dockerized supervision on Kubernetes"><meta name=og:title content="Kubevisor"><meta name=og:description content="Dockerized supervision on Kubernetes"><meta name=og:logo content="/gfx/Logo_Kubevisor.png"><meta name=twitter:title content="Kubevisor"><link rel=icon type=image/svg href=/gfx/Favicon_Kubevisor.svg><link rel=stylesheet id=google-fonts-css href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" type=text/css media=all><link rel=stylesheet id=main-css href=/css/style.css type=text/css media=all><link rel=stylesheet id=main-css href=/css/tabs.css type=text/css media=all><link rel=stylesheet id=main-css href=/css/tutorial-link.css type=text/css media=all><script type=text/javascript src=/js/jquery-3.5.0.min.js></script><script type=text/javascript src=/js/showdown.min.js></script><script type=text/javascript src=/js/highcharts.js></script><script type=text/javascript src=/js/highcharts-more.js></script><script type=text/javascript>function send_contact(a){const b=$(a).serialize();$.ajax({type:'POST',url:"https://hooks.zapier.com/hooks/catch/7255418/ow4b2ez/silent/",data:b}).then(()=>{parent.jQuery.fancybox.getInstance().close()})}</script><script type=application/javascript>$(function(){const a=$('.embed-tabs');a.find($('nav .ul .li a')).click(function(){const b=$(this),c=b.data('ref');a.find($('nav .ul .li')).removeClass('is-active'),b.parent().addClass('is-active'),a.find($('.content .tab')).removeClass('is-active'),a.find($(`.content .tab[data-ref='${c}']`)).addClass('is-active')}),a.map((c,b)=>{const a=$(b);$(a.find($('nav .ul .li'))[0]).addClass('is-active'),$(a.find($('.content .tab'))[0]).addClass('is-active')})})</script><script type=application/javascript>window.BaseWebComponent={extends({tag:a,template:b,render:c}){customElements.define(a,class extends HTMLElement{connectedCallback(){const a=document.getElementById(b),d=document.importNode(a.content,!0);$(this).append(d),c($(this))}})}}</script></head><body><header><div class=header><div class=hTop><div class=content><nav><div class=hSms id=hSms><span></span><span></span></div><h1><a href=/ class=hLogo><img src=/gfx/Logo_Kubevisor.png alt=Kubevisor></a></h1><ul class="hNavSec noNav" id=hNavSec><li class=hNavSNoFix><a href=https://kubernetes.io><img src=/gfx/Logo_Kubernetes.svg alt=Kubernetes></a></li><li><a data-fancybox data-type=iframe href=/contact>Contact</a></li><li><a href=/about>About us</a></li><li><a href=/legals>Legals</a></li><li class=hNavSNoFix><a href=https://github.com/link-society target=_blank><img src=/gfx/Logo_Github.svg alt=Github></a></li></ul></nav></div></div><div class="hMenu noNav" id=hMenu><div class=content><nav><ul class=hNav><li><a href=/getting-started>Getting Started</a></li><li><a href=/products>Products and Services</a></li><li><a href=/docs/>Documentation</a></li></ul></nav></div></div></div></header><section><div class=mainContent><div class=content><nav><ul class=navInterne><li><a href=/docs/dockerized-supervision/web/><i class=icon-mdi_navigate_before></i></a></li></ul></nav><h1><a href=/docs/>📚</a> /
+<a href=/docs/dockerized-supervision/>Dockerized Supervision</a> /
+<a href=/docs/dockerized-supervision/web/>Web Oriented</a> /
+Notify Slack</h1><h2>Learn to setup your notifications</h2><div class=dispos><div class=dispoCol><ul class=colMenu><li><a href=/docs/dockerized-supervision/web/availability/>Ensure Availability</a></li><li class=act><span>Notify Slack</span></li><li><a href=/docs/dockerized-supervision/web/plan/>Plan</a></li><li><a href=/docs/dockerized-supervision/web/reuse/>Reusability</a></li></ul></div><div class=contenu><h1 id=use-case>Use Case</h1><a href=/docs/dockerized-supervision/web/availability/ class="tutorial-link tutorial-come-from"><span>&#8592; Consider reading first</span>
+<span class=tutorial-next-page>Ensure Availability</span></a><p>You have configured a <a href=https://api.slack.com/messaging/webhooks>Slack Webhook</a> to receive notifications from your monitoring.</p><h1 id=how-to>How To</h1><p>Create a secret containing the URL of your webhook:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>---
+<span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Secret</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>my-slack-webhook</span>
+  <span style=color:#f92672>namespace</span>: <span style=color:#ae81ff>default</span>
+<span style=color:#f92672>stringData</span>:
+  <span style=color:#f92672>URL</span>: <span style=color:#e6db74>&#34;&lt;your slack webhook URL&gt;&#34;</span>
+</code></pre></div><p>Then create the following <code>Reactor</code> resource:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>---
+<span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>kubevisor.io/v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Reactor</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>slack-notifier</span>
+  <span style=color:#f92672>namespace</span>: <span style=color:#ae81ff>default</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>unitSelector</span>:
+    <span style=color:#f92672>app</span>: <span style=color:#ae81ff>my-service</span>
+  <span style=color:#f92672>triggers</span>:
+    <span style=color:#f92672>successful</span>: <span style=color:#66d9ef>no</span>
+    <span style=color:#f92672>failed</span>: <span style=color:#66d9ef>no</span>
+    <span style=color:#f92672>fixed</span>: <span style=color:#66d9ef>yes</span>
+    <span style=color:#f92672>regression</span>: <span style=color:#66d9ef>yes</span>
+  <span style=color:#f92672>image</span>:
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>curlimages/curl:latest</span>
+    <span style=color:#f92672>pullPolicy</span>: <span style=color:#ae81ff>Always</span>
+    <span style=color:#f92672>command</span>: &gt;<span style=color:#e6db74>
+</span><span style=color:#e6db74>      curl -X POST $HOST -H &#34;Content-Type: application/json&#34; \
+</span><span style=color:#e6db74>           -d &#34;{ \&#34;text\&#34;: \&#34;state: $UNIT_STATE\&#34; }&#34;</span>      
+  <span style=color:#f92672>env</span>:
+    - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>HOST</span>
+      <span style=color:#f92672>valueFrom</span>:
+        <span style=color:#f92672>secretKeyRef</span>:
+          <span style=color:#f92672>name</span>: <span style=color:#ae81ff>my-slack-webhook</span>
+          <span style=color:#f92672>key</span>: <span style=color:#ae81ff>URL</span>
+</code></pre></div><blockquote><p>The <code>unitSelector</code> property selects the units (by label) that need to trigger this reactor.</p><p>The <code>triggers</code> property controls when the reactor will be executed.</p><p>The <code>image</code> and <code>env</code> properties serves the same purpose as for the Unit resource.</p><p>The container environment is automatically populated with the variable <code>UNIT_STATE</code> (the Unit&rsquo;s last exit code).</p></blockquote><p>For the complete <code>Reactor</code> schema, <a href=/docs/concepts/reactor/schema>see this page</a>.</p><a href=/docs/dockerized-supervision/web/plan/ class=tutorial-link><span>Continue reading &#8594;</span>
+<span class=tutorial-next-page>Plan</span></a></div></div></div></div></section><footer><div class=footer><p>Website content is released under the terms of the
+<a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>CC BY NC SA 4.0</a>
+license.</p></div></footer><script type=text/javascript src=/js/scripts.js></script></body></html>
