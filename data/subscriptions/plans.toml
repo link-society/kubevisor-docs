@@ -1,0 +1,68 @@
+#English page
+
+features = [
+  "Kubirds", 
+  "Units / Reactors Packs", 
+  "Installation", 
+  "Update", 
+  "Support", 
+  "Maximum Response Time",
+  "Remote intervention",
+  "On-site intervention",
+  "Estimate resolution time",
+  "Price",
+  "Duration"
+  ]
+
+[[subscription]]
+
+custom_css = "prodLevel1"
+name = "Discovery"
+icon = "⚗️"
+Kubirds = true
+'Units / Reactors Packs' = "On demand"
+Installation = "On demand"
+Update = false
+Support = "Community"
+'Maximum Response Time' = "5 business days"
+'Remote intervention' = false
+'On-site intervention' = false
+'Estimate resolution time' = true
+Price = "Starting at <br>1 000€ / node"
+Duration = "12 months"
+
+[[subscription]]
+
+
+custom_css = "prodLevel2"
+name = "Gold"
+icon = "🥇"
+Kubirds = true
+'Units / Reactors Packs' = "On demand"
+Installation = true
+Update = true
+Support = "Unlimited tickets"
+'Maximum Response Time' = "48h business hours"
+'Remote intervention' = true
+'On-site intervention' = false
+'Estimate resolution time' = true
+Price = "Custom"
+Duration = "Implicitly renewed each year"
+
+[[subscription]]
+
+custom_css = "prodLevel3"
+name = "Enterprise"
+icon = "🏢"
+Kubirds = true
+'Units / Reactors Packs' = true
+Installation = true
+Update = true
+Support = "Unlimited tickets" 
+'Maximum Response Time' = "24h + on-call duty"
+'Remote intervention' = true
+'On-site intervention' = true
+'Estimate resolution time' = true
+Price = "Custom"
+Duration = "Implicitly renewed each year"
+
